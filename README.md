@@ -1,4 +1,4 @@
-# microbit-demo-user
+# microbit-demo-root
 
 A component of a micro:bit demonstration for controlling the network
 
