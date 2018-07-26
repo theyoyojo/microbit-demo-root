@@ -1,0 +1,12 @@
+{
+  "name": "microbit-demo-root",
+  "version": "0.0.0",
+  "bin": "./source",
+  "private": true,
+  "description": "Microbit demonstration network control program",
+  "author": "Joel Savitz",
+  "license": "MIT",
+  "dependencies": {
+    "microbit": "lancaster-university/microbit"
+  }
+}
