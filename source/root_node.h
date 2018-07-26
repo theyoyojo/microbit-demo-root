@@ -34,73 +34,51 @@ class RootNode {
 
 private:
 
-/*
-  Declerations of animations corresponding to signals.
-  This is polish and not a must-do
-
-  Actually, these might all be axed entirely
-
-ECG::Animator animatorSigRootReset ;
-ECG::Animator animatorSigRootDemo ;
-ECG::Animator animatorSigRootListen ;
-ECG::Animator animatorSigRootMessage ;
-ECG::Animator animatorSigRootNewGame ;
-ECG::Animator animatorSigRootGoodGame ;
-
-ECG::Animator animatorSigUserConversionA ;
-ECG::Animator animatorSigUserConversionB ;
-
-
-ECG::Animator animatorBroadcast ;
-
-*/
-
-uint32_t selectedSignalIndex ;
-
 static uint8_t signals[] ;
 
 static size_t signals_size ;
 
 static PacketBuffer tempPacketBuffer ;
 
+static int selectedSignalIndex ;
+
 public:
 
-/**
-  * Default constructor
-  * 
-  * Builds animations and registers event handlers
-  */
-RootNode() ;
+  /**
+    * Default constructor
+    * 
+    * Builds animations and registers event handlers
+    */
+  RootNode() ;
 
-/**
-  * Display an animation to signify the execution of a broadcast
-  * 
-  * @param msDelay: A number of milliseconds to pause between stages of the animation
-  */
-void broadcastAnimation(int msDelay) ;
-void broadcastAnimation() ;
+  /**
+    * Display an animation to signify the execution of a broadcast
+    * 
+    * @param msDelay: A number of milliseconds to pause between stages of the animation
+    */
+  void broadcastAnimation(int msDelay) ;
+  void broadcastAnimation() ;
 
-/**
-  * Event handler for (A)
-  */
-void onButtonAUp(MicroBitEvent e) ;
+  /**
+    * Event handler for (A)
+    */
+  void onButtonAUp(MicroBitEvent e) ;
 
-/**
-  * Event handler for (B)
-  */ 
-void onButtonBUp(MicroBitEvent e) ;
+  /**
+    * Event handler for (B)
+    */ 
+  void onButtonBUp(MicroBitEvent e) ;
 
-/**
-  * Event handler for (AB)
-  */
-void onButtonABDown(MicroBitEvent e) ;
+  /**
+    * Event handler for (AB)
+    */
+  void onButtonABDown(MicroBitEvent e) ; 
+  /**
+    * Primary execution loop called by main
+    */
+  void loop() ;
 
-/**
-  * Primary execution loop called by main
-  */
-void loop() ;
-
-size_t test() ;
+  void test() ;
 
 } ; // class RootNode
 

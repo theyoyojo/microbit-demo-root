@@ -35,6 +35,7 @@ DEALINGS IN THE SOFTWARE.
 #define SIG_RMSG 3
 #define SIG_RNG 4
 #define SIG_RGG 5
+#define SIG_RU 6
 
 // User signals
 #define SIG_UA 100

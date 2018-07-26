@@ -32,6 +32,10 @@ MicroBit uBit ;
 
 using namespace ECG ;
 
+//uint8_t& indexSelectedSignal
+
+int RootNode::selectedSignalIndex = 0 ;
+
 uint8_t RootNode::signals[] = {
     SIG_RR,
     SIG_RD,
@@ -39,6 +43,7 @@ uint8_t RootNode::signals[] = {
     SIG_RMSG,
     SIG_RNG,
     SIG_RGG,
+    SIG_RU,
     SIG_UA,
     SIG_UB 
 } ;
@@ -54,18 +59,17 @@ RootNode::RootNode() {
     // This is set to the starting index of the array, which
     // incedentally has the same value as SIG_RR itself
     selectedSignalIndex = 0 ;
-    uBit.serial.printf("SelectedIndex = %d\r\n", selectedSignalIndex) ;
-    uBit.serial.printf("signals arr size= %d\r\n", signals_size) ;
 
+    uBit.serial.printf("SelectedIndex = %d\r\n", selectedSignalIndex) ;
+
+    uBit.serial.printf("signals arr size= %d\r\n", signals_size) ;
 
     // Ensure the contents of the PacketBuffer are nongarbage
     tempPacketBuffer[0] = 0 ;
 
-
     uBit.radio.enable() ;
 
     uBit.messageBus.listen(MICROBIT_ID_BUTTON_A, MICROBIT_BUTTON_EVT_UP, this, &RootNode::onButtonAUp) ;
-
     uBit.messageBus.listen(MICROBIT_ID_BUTTON_B, MICROBIT_BUTTON_EVT_UP, this, &RootNode::onButtonBUp) ;
     uBit.messageBus.listen(MICROBIT_ID_BUTTON_AB, MICROBIT_BUTTON_EVT_DOWN, this, &RootNode::onButtonABDown) ;
 }
@@ -98,6 +102,7 @@ void RootNode::onButtonAUp(MicroBitEvent e) {
 
     // But if you go to far, loop back to 0
     if (selectedSignalIndex > signals_size - 1) {
+        uBit.serial.printf("loop contition satisfied, will return to 0\r\n") ;
         selectedSignalIndex = 0 ;
     }
     uBit.serial.printf("final SelectedIndex = %d\r\n", selectedSignalIndex) ;
@@ -106,13 +111,17 @@ void RootNode::onButtonAUp(MicroBitEvent e) {
 // Decrement through signal list
 void RootNode::onButtonBUp(MicroBitEvent e) {
 
+    uBit.serial.printf("pre-- SelectedIndex = %d\r\n", selectedSignalIndex) ;
+
     // If you are about to go too far, loop back to max - 1
     if (selectedSignalIndex == 0) {
         selectedSignalIndex = signals_size - 1;
+        uBit.serial.printf("already at 0, loop to size-1...\r\n") ;
     }
     // Otherwise, simply decrement
     else {
         selectedSignalIndex-- ;
+        uBit.serial.printf("post-- SelectedIndex = %d\r\n", selectedSignalIndex) ;
     }
     uBit.serial.printf("SelectedIndex = %d\r\n", selectedSignalIndex) ;
 }
@@ -122,21 +131,20 @@ void RootNode::onButtonABDown(MicroBitEvent e) {
 
     broadcastAnimation() ;
 
-    uBit.serial.printf("SelectedIndex = %d\r\n", selectedSignalIndex) ;
+    uBit.serial.printf("BROADCAST while SelectedIndex = %d\r\n", selectedSignalIndex) ;
 
     tempPacketBuffer[0] = signals[selectedSignalIndex] ;
 
     uBit.radio.datagram.send(tempPacketBuffer) ;
 }
 
-// TODO: Delete this when no longer needed
-size_t RootNode::test() {
-    return signals_size ;
-}
-
 void RootNode::loop() {
-    uBit.display.print(signals[selectedSignalIndex]) ;
     uBit.sleep(500) ;
     uBit.display.clear() ;
     uBit.sleep(500) ;
+    uBit.display.print(signals[selectedSignalIndex]) ;
+}
+
+void RootNode::test() {
+    //uBit.sleep(500) ;
 }

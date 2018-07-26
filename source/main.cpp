@@ -27,7 +27,6 @@ DEALINGS IN THE SOFTWARE.
 
 // Root Node
 
-
 /*
   Project Essential TODO:
     -- fix animation error
@@ -42,10 +41,11 @@ int main() {
     // https://support.microbit.org/support/solutions/articles/19000016969-what-does-the-number-after-the-sad-face-micro-bit-mean-
     // See the above link for more details.
 
-    ECG::RootNode x ;
+    ECG::RootNode node ;
 
     while(1) {
-        x.loop() ;
+        node.loop() ;
+        //node.test() ;
     }
 
 }
