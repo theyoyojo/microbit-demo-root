@@ -60,25 +60,26 @@ public:
   void broadcastAnimation() ;
 
   /**
-    * Event handler for (A)
+    * Event handler for A-U
+    * 
+    * @param e: An object representing the raised event passed
+    * to the function via the messageBus
     */
   void onButtonAUp(MicroBitEvent e) ;
 
   /**
-    * Event handler for (B)
+    * Event handler for B-U
+    * 
+    * @param e: An object representing the raised event passed
+    * to the function via the messageBus
     */ 
   void onButtonBUp(MicroBitEvent e) ;
 
-  /**
-    * Event handler for (AB)
-    */
-  void onButtonABDown(MicroBitEvent e) ; 
   /**
     * Primary execution loop called by main
     */
   void loop() ;
 
-  void test() ;
 
 } ; // class RootNode
 

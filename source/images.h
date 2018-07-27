@@ -41,18 +41,11 @@ static MicroBitImage& centerRing ;
 static MicroBitImage& middleRing ;
 static MicroBitImage& outerRing ;
 
-// A smile (currently unused)
-static MicroBitImage& smile ;
-
-// Shapes used for team identification
-static MicroBitImage& square_hollow ;
-static MicroBitImage& square_filled ;
-static MicroBitImage& triangle_hollow ;
-static MicroBitImage& triangle_filled ;
-
-// Arrows used for user direction
-static MicroBitImage& left_arrow ;
-static MicroBitImage& right_arrow ;
+// Stages of loading animation
+static MicroBitImage& loading1 ;
+static MicroBitImage& loading2 ;
+static MicroBitImage& loading3 ;
+static MicroBitImage& loading4 ;
 
 } ; // struct Images
 

@@ -28,35 +28,13 @@ DEALINGS IN THE SOFTWARE.
 // Definition of signals for upcoming demo system
 // See specification for more information
 
-// Root signals
-
 // Reset all nodes to boot state (DEMO)
-#define SIG_RR 0
-
-// Set all nodes to DEMO state
-#define SIG_RD 1
-
-// Set all nodes to LISTEN state
-#define SIG_RL 2
-
-// Set all nodes to MESSAGE state (display their welcome message)
-#define SIG_RMSG 3
-
-// Begin an new game on the network (Set all nodes to GAME_UNASSIGNED state)
-#define SIG_RNG 4
-
-// End the network's current game (Set all nodes to LISTEN state)
-#define SIG_RGG 5
-
-// Unassign an assigned node if they are listening for the signal
-#define SIG_RU 6
-
-// User signals
+#define SIG_R 0
 
 // Set all devices in GAME_LISTEN_A state to GAME_TEAM_A state
-#define SIG_UA 100
+#define SIG_A 1
 
 // Set all devices in GAME_LISTEN_B state to GAME_TEAM_B state
-#define SIG_UB 101
+#define SIG_B 2
 
 #endif // SIGNALS_H

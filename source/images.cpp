@@ -51,15 +51,47 @@ MicroBitImage _outerRing(
     "255,255,255,255,255\n"
 ) ;
 
-MicroBitImage _smile(
-    "0,255,0,0,255,0\n"
-    "0,255,0,0,255,0\n"
+MicroBitImage _loading1(
     "0,0,0,0,0\n"
-    "255,0,0,0,255\n"
-    "0,255,255,255,0\n"
+    "0,255,0,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,0,255,0\n"
+    "0,0,0,0,0\n"
 ) ;
+
+MicroBitImage _loading2(
+    "0,0,0,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,0,0,0\n"
+) ;
+
+MicroBitImage _loading3(
+    "0,0,0,0,0\n"
+    "0,0,0,255,0\n"
+    "0,0,255,0,0\n"
+    "0,255,0,0,0\n"
+    "0,0,0,0,0\n"
+) ;
+
+MicroBitImage _loading4(
+    "0,0,0,0,0\n"
+    "0,0,0,0,0\n"
+    "0,255,255,255,0\n"
+    "0,0,0,0,0\n"
+    "0,0,0,0,0\n"
+) ;
+
+// Below, previously declared but undefined static
+// MicroBitImage&'s are given definitions tying them
+// to the representations above
 
 MicroBitImage& Images::centerRing = _centerRing ;
 MicroBitImage& Images::middleRing = _middleRing ;
 MicroBitImage& Images::outerRing = _outerRing ;
-MicroBitImage& Images::smile = _smile ;
+
+MicroBitImage& Images::loading1 = _loading1 ;
+MicroBitImage& Images::loading2 = _loading2 ;
+MicroBitImage& Images::loading3 = _loading3 ;
+MicroBitImage& Images::loading4 = _loading4 ;
