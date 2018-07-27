@@ -22,30 +22,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
-#include "MicroBit.h"
 #include "root_node.h"
 
 // Root Node
 
-/*
-  Project Essential TODO:
-    -- fix animation error
-*/
-
-// Declare animations to represent signals
-
 int main() {
+    ECG::RootNode node;
 
     // TODO: move this to known issues or README document and out of main.cpp
     // Declaring an ECG::RootNode in global scope causes the device to throw error code 030 (Heap corruption).
     // https://support.microbit.org/support/solutions/articles/19000016969-what-does-the-number-after-the-sad-face-micro-bit-mean-
     // See the above link for more details.
 
-    ECG::RootNode node ;
-
     while(1) {
         node.loop() ;
-        //node.test() ;
     }
-
 }

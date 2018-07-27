@@ -22,6 +22,11 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
+/*
+    This header filed declares references to a a number of useful
+    MicroBitImage objects. 
+*/
+
 #ifndef IMAGES_H
 #define IMAGES_H "images.h"
 
@@ -31,16 +36,26 @@ namespace ECG {
 
 struct Images {
 
+// Stages of broadcast/download animation
 static MicroBitImage& centerRing ;
-
 static MicroBitImage& middleRing ;
-
 static MicroBitImage& outerRing ;
 
+// A smile (currently unused)
 static MicroBitImage& smile ;
+
+// Shapes used for team identification
+static MicroBitImage& square_hollow ;
+static MicroBitImage& square_filled ;
+static MicroBitImage& triangle_hollow ;
+static MicroBitImage& triangle_filled ;
+
+// Arrows used for user direction
+static MicroBitImage& left_arrow ;
+static MicroBitImage& right_arrow ;
 
 } ; // struct Images
 
-}
+} // namespace ECG
 
 #endif // IMAGES_H

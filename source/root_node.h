@@ -34,13 +34,13 @@ class RootNode {
 
 private:
 
-static uint8_t signals[] ;
+static uint8_t _signals[] ;
 
-static size_t signals_size ;
+static size_t _signals_size ;
 
-static PacketBuffer tempPacketBuffer ;
+static PacketBuffer _tempPacketBuffer ;
 
-static int selectedSignalIndex ;
+static int _selectedSignalIndex ;
 
 public:
 
