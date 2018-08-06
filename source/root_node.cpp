@@ -102,11 +102,11 @@ void RootNode::onButtonBUp(MicroBitEvent e) {
     _tempPacketBuffer[0] = _signals[_selectedSignalIndex] ;
 
     uBit.radio.datagram.send(_tempPacketBuffer) ;
+
+    uBit.serial.printf("Broadcast signal: %d\r\n", _tempPacketBuffer[0]) ;
 }
 
 void RootNode::loop() {
-    uBit.sleep(500) ;
-    uBit.display.clear() ;
-    uBit.sleep(500) ;
     uBit.display.print(_signals[_selectedSignalIndex]) ;
+    uBit.sleep(10) ;
 }
