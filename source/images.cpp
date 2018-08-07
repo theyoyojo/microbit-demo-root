@@ -51,31 +51,31 @@ MicroBitImage _outerRing(
     "255,255,255,255,255\n"
 ) ;
 
-MicroBitImage _loading1(
+MicroBitImage _loading0(
     "0,0,0,0,0\n"
     "0,255,0,0,0\n"
     "0,0,255,0,0\n"
     "0,0,0,255,0\n"
+    "0,0,0,0,0\n"
+) ;
+
+MicroBitImage _loading1(
+    "0,0,0,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,255,0,0\n"
+    "0,0,255,0,0\n"
     "0,0,0,0,0\n"
 ) ;
 
 MicroBitImage _loading2(
     "0,0,0,0,0\n"
-    "0,0,255,0,0\n"
-    "0,0,255,0,0\n"
-    "0,0,255,0,0\n"
-    "0,0,0,0,0\n"
-) ;
-
-MicroBitImage _loading3(
-    "0,0,0,0,0\n"
     "0,0,0,255,0\n"
     "0,0,255,0,0\n"
     "0,255,0,0,0\n"
     "0,0,0,0,0\n"
 ) ;
 
-MicroBitImage _loading4(
+MicroBitImage _loading3(
     "0,0,0,0,0\n"
     "0,0,0,0,0\n"
     "0,255,255,255,0\n"
@@ -91,7 +91,14 @@ MicroBitImage& Images::centerRing = _centerRing ;
 MicroBitImage& Images::middleRing = _middleRing ;
 MicroBitImage& Images::outerRing = _outerRing ;
 
-MicroBitImage& Images::loading1 = _loading1 ;
-MicroBitImage& Images::loading2 = _loading2 ;
-MicroBitImage& Images::loading3 = _loading3 ;
-MicroBitImage& Images::loading4 = _loading4 ;
+// The loading animation is stored as an array
+
+MicroBitImage Images::loading[] = {
+    _loading0, // 1
+    _loading1, // 2
+    _loading2, // 3
+    _loading3  // 4
+    } ;
+
+// And so it follows... 4
+int Images::nLoadingAnimationFrames = 4 ;
