@@ -1,6 +1,8 @@
 # microbit-demo-root
 
-A component of a micro:bit demonstration for controlling the network
+A component of a micro:bit demonstration. Code for an admin node.
+
+[The other component](https://github.com/theyoyojo/microbit-demo-user)
 
 ### How to compile and install:
 
@@ -22,4 +24,4 @@ And finally `yotta build` to generate your .hex file.
 
 ===
 
-Disclaimer: This project is completely unstable and in it's current form should not be used by anyone.
+Disclaimer: This project may have unknown issues.

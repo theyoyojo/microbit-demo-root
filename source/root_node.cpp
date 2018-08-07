@@ -23,90 +23,71 @@ DEALINGS IN THE SOFTWARE.
 */
 
 #include "root_node.h"
-#include "images.h"
 #include "MicroBit.h"
-
-#define DEFAULT_ANIMATION_DELAY 100
 
 MicroBit uBit ;
 
 using namespace ECG ;
 
-//uint8_t& indexSelectedSignal
-
-int RootNode::_selectedSignalIndex = 0 ;
-
-uint8_t RootNode::_signals[] = {
-    SIG_R,
-    SIG_A,
-    SIG_B
-} ;
-
-size_t RootNode::_signals_size = sizeof(_signals) ;
-
+int RootNode::_selectedSignal = 0 ;
 
 PacketBuffer RootNode::_tempPacketBuffer(1) ;
 
 RootNode::RootNode() {
 
-    uBit.init() ;
-    uBit.radio.enable() ;
+  // Device initialization
+  uBit.init() ;
+  uBit.radio.enable() ;
 
-    // This is set to the starting index of the array, which
-    // incedentally has the same value as SIG_RR itself
-    _selectedSignalIndex = 0 ;
+  // Set the selected signal to the first signal
+  _selectedSignal = SIG_R ;
 
-    // Ensure the contents of the PacketBuffer are nongarbage
-    _tempPacketBuffer[0] = 0 ;
+  // Ensure the contents of the PacketBuffer payload match the initial
+  // selected signal
+  _tempPacketBuffer[0] = _selectedSignal ;
 
+  // Register button event handlers
 
-    uBit.messageBus.listen(MICROBIT_ID_BUTTON_A, MICROBIT_BUTTON_EVT_UP, this, &RootNode::onButtonAUp) ;
-    uBit.messageBus.listen(MICROBIT_ID_BUTTON_B, MICROBIT_BUTTON_EVT_UP, this, &RootNode::onButtonBUp) ;
+  // Button A
+  uBit.messageBus.listen(MICROBIT_ID_BUTTON_A, MICROBIT_BUTTON_EVT_UP,
+  this, &RootNode::onButtonAUp) ;
+
+  // Button B
+  uBit.messageBus.listen(MICROBIT_ID_BUTTON_B, MICROBIT_BUTTON_EVT_UP,
+  this, &RootNode::onButtonBUp) ;
 }
 
-
-void RootNode::broadcastAnimation(int msDelay) {
-
-   uBit.display.print(ECG::Images::centerRing) ;
-   uBit.sleep(msDelay) ;
-
-   uBit.display.print(ECG::Images::middleRing) ;
-   uBit.sleep(msDelay) ;
-
-   uBit.display.print(ECG::Images::outerRing) ;
-   uBit.sleep(msDelay) ;
-
-}
-
-void RootNode::broadcastAnimation() {
-    broadcastAnimation(DEFAULT_ANIMATION_DELAY) ;
-}
-
-// Increment through signal list
+// Increment through signals
 void RootNode::onButtonAUp(MicroBitEvent e) {
 
-    // Increment
-    _selectedSignalIndex++ ;
+  // Increment signal
+  _selectedSignal++ ;
 
-    // But if you go to far, loop back to 0
-    if (_selectedSignalIndex > _signals_size - 1) {
-        _selectedSignalIndex = 0 ;
-    }
+  // But if you go to far, loop back to 0
+  if (_selectedSignal >= ECG::nSignals ) {
+    _selectedSignal = ECG::SIG_R ;
+  }
 }
 
-// Decrement through signal list
+// Broadcast signal
 void RootNode::onButtonBUp(MicroBitEvent e) {
 
-    broadcastAnimation() ;
+  // Put the signal in the PacketBuffer payload
+  _tempPacketBuffer[0] = _selectedSignal ;
 
-    _tempPacketBuffer[0] = _signals[_selectedSignalIndex] ;
+  // Send it.
+  uBit.radio.datagram.send(_tempPacketBuffer) ;
 
-    uBit.radio.datagram.send(_tempPacketBuffer) ;
-
-    uBit.serial.printf("Broadcast signal: %d\r\n", _tempPacketBuffer[0]) ;
+  uBit.serial.printf("Broadcast signal: %d\r\n", _tempPacketBuffer[0]) ;
 }
 
+// Primary execution loop
 void RootNode::loop() {
-    uBit.display.print(_signals[_selectedSignalIndex]) ;
-    uBit.sleep(10) ;
+
+  // Display selected signal
+  uBit.display.print(_selectedSignal) ;
+
+  // Refresh display every 10 ms
+  uBit.sleep(10) ;
+
 }

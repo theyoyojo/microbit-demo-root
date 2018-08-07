@@ -22,6 +22,15 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
+/**
+  root_node.h
+
+  This file declares a class that represents the device and functionality of a
+  network node that is intended to be used as an interface to control the
+  demonstration game implemented by this project and it's user (network access)
+  companion project.
+**/
+
 #ifndef ROOT_NODE_H
 #define ROOT_NODE_H
 
@@ -34,13 +43,11 @@ class RootNode {
 
 private:
 
-static uint8_t _signals[] ;
-
-static size_t _signals_size ;
-
+// A packet buffer used to broadcast signals
 static PacketBuffer _tempPacketBuffer ;
 
-static int _selectedSignalIndex ;
+// The currently selected signal
+static int _selectedSignal ;
 
 public:
 
@@ -50,14 +57,6 @@ public:
     * Builds animations and registers event handlers
     */
   RootNode() ;
-
-  /**
-    * Display an animation to signify the execution of a broadcast
-    * 
-    * @param msDelay: A number of milliseconds to pause between stages of the animation
-    */
-  void broadcastAnimation(int msDelay) ;
-  void broadcastAnimation() ;
 
   /**
     * Event handler for A-U
@@ -79,7 +78,6 @@ public:
     * Primary execution loop called by main
     */
   void loop() ;
-
 
 } ; // class RootNode
 
