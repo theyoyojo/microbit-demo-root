@@ -22,17 +22,20 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
+/**
+  main.cpp
+
+  This file defines the main node object and calls the node's loop function.
+**/
+
 #include "root_node.h"
 
-// Root Node
-
+// Root Node entry point
 int main() {
-    ECG::RootNode node;
 
-    // TODO: move this to known issues or README document and out of main.cpp
-    // Declaring an ECG::RootNode in global scope causes the device to throw error code 030 (Heap corruption).
-    // https://support.microbit.org/support/solutions/articles/19000016969-what-does-the-number-after-the-sad-face-micro-bit-mean-
-    // See the above link for more details.
+    // Declaration of an ECG::RootNode in global scope causes the device to throw
+    // error code 030 (Heap corruption).
+    ECG::RootNode node;
 
     while(1) {
         node.loop() ;

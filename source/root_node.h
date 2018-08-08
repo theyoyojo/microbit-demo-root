@@ -43,6 +43,9 @@ class RootNode {
 
 private:
 
+// An abstraction of the device functionality provided by the API
+static MicroBit _uBit ;
+
 // A packet buffer used to broadcast signals
 static PacketBuffer _tempPacketBuffer ;
 

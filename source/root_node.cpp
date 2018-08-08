@@ -22,12 +22,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
+/**
+  root_node.cpp
+
+  This file implements class RootNode as declared and described in root_node.h
+**/
+
 #include "root_node.h"
 #include "MicroBit.h"
 
-MicroBit uBit ;
 
 using namespace ECG ;
+
+MicroBit RootNode::_uBit ;
 
 int RootNode::_selectedSignal = 0 ;
 
@@ -36,8 +43,8 @@ PacketBuffer RootNode::_tempPacketBuffer(1) ;
 RootNode::RootNode() {
 
   // Device initialization
-  uBit.init() ;
-  uBit.radio.enable() ;
+  _uBit.init() ;
+  _uBit.radio.enable() ;
 
   // Set the selected signal to the first signal
   _selectedSignal = SIG_R ;
@@ -49,11 +56,11 @@ RootNode::RootNode() {
   // Register button event handlers
 
   // Button A
-  uBit.messageBus.listen(MICROBIT_ID_BUTTON_A, MICROBIT_BUTTON_EVT_UP,
+  _uBit.messageBus.listen(MICROBIT_ID_BUTTON_A, MICROBIT_BUTTON_EVT_UP,
   this, &RootNode::onButtonAUp) ;
 
   // Button B
-  uBit.messageBus.listen(MICROBIT_ID_BUTTON_B, MICROBIT_BUTTON_EVT_UP,
+  _uBit.messageBus.listen(MICROBIT_ID_BUTTON_B, MICROBIT_BUTTON_EVT_UP,
   this, &RootNode::onButtonBUp) ;
 }
 
@@ -64,8 +71,8 @@ void RootNode::onButtonAUp(MicroBitEvent e) {
   _selectedSignal++ ;
 
   // But if you go to far, loop back to 0
-  if (_selectedSignal >= ECG::nSignals ) {
-    _selectedSignal = ECG::SIG_R ;
+  if (_selectedSignal >= nSignals ) {
+    _selectedSignal = SIG_R ;
   }
 }
 
@@ -76,18 +83,18 @@ void RootNode::onButtonBUp(MicroBitEvent e) {
   _tempPacketBuffer[0] = _selectedSignal ;
 
   // Send it.
-  uBit.radio.datagram.send(_tempPacketBuffer) ;
+  _uBit.radio.datagram.send(_tempPacketBuffer) ;
 
-  uBit.serial.printf("Broadcast signal: %d\r\n", _tempPacketBuffer[0]) ;
+  _uBit.serial.printf("Broadcast signal: %d\r\n", _tempPacketBuffer[0]) ;
 }
 
 // Primary execution loop
 void RootNode::loop() {
 
   // Display selected signal
-  uBit.display.print(_selectedSignal) ;
+  _uBit.display.print(_selectedSignal) ;
 
   // Refresh display every 10 ms
-  uBit.sleep(10) ;
+  _uBit.sleep(10) ;
 
 }
