@@ -20,6 +20,19 @@ yotta install lancaster-university/microbit
 
 ```
 
+#### Important note:
+In file microbit-demo-root/yotta_modules/microbit_dal/inc/core/MicroBitConfig.h
+Change line 199 from:
+```
+#define MICROBIT_BLE_ENABLED                    1
+```
+to
+```
+#define MICROBIT_BLE_ENABLED                    0
+```
+In order to enable the radio functionality of the device (which is mutually exclusive with bluetooth functionality)
+
+
 And finally `yotta build` to generate your .hex file.
 
 ===

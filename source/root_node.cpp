@@ -29,7 +29,6 @@ DEALINGS IN THE SOFTWARE.
 **/
 
 #include "root_node.h"
-#include "MicroBit.h"
 
 
 using namespace ECG ;
